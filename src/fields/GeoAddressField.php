@@ -73,7 +73,7 @@ class GeoAddressField extends Field
 		}
 
 		if (!is_array($value)) {
-			$value = json_decode($value);
+			$value = json_decode($value, true);
 		}
 
 		return $value;

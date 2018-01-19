@@ -2,7 +2,7 @@
     "name": "tde/craftplugin-geoaddress",
     "description": "Geo Address fields for Craft Sections",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "support": {
         "docs": "https://github.com/tdeNL/craftplugin-geoaddress/blob/master/README.md",
         "issues": "https://github.com/tdeNL/craftplugin-geoaddress/issues"
@@ -25,7 +25,7 @@
     "extra": {
         "name": "TDE - Geo Address Fields",
         "handle": "geoaddress",
-        "schemaVersion": "1.0.0",
+        "schemaVersion": "1.0.1",
         "hasCpSettings": true,
         "hasCpSection": false,
         "changelogUrl": "https://raw.githubusercontent.com/tdeNL/craftplugin-geoaddress/master/CHANGELOG.md",

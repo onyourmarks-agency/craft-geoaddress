@@ -1,7 +1,7 @@
 {
     "pluginName": "TDE - Geo Address",
     "pluginDescription": "Geo Address fields for Craft Sections",
-    "pluginVersion": "1.0.0",
+    "pluginVersion": "1.0.1",
     "pluginAuthorName": "TDE",
     "pluginVendorName": "tde",
     "pluginAuthorUrl": "http://www.tde.nl",

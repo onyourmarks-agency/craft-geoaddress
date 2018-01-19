@@ -74,7 +74,7 @@ class GeoAddressService extends Component
 	 * @return array
 	 * @throws \Exception
 	 */
-    public function filterEntries(array $entries, $lat, $lng, $radius)
+	public function filterEntries(array $entries, $lat, $lng, $radius)
 	{
 		$filterResults = [];
 
@@ -85,20 +85,26 @@ class GeoAddressService extends Component
 				throw new \Exception('The given entry for geo-address filtering does not contain a GeoAddress-field with the handle \'address\'.');
 			}
 
-			$filterDistance = $this->calculateDistance($lat, $lng, $entry->getFieldValue('address')->lat, $entry->getFieldValue('address')->lng);
+			$filterDistance = $this->calculateDistance($lat, $lng, $entry['address']['lat'], $entry['address']['lng']);
 			if ($filterDistance > $radius) {
 				continue;
 			}
 
 			// add the distance, might be useful for the user
-			$entry->address->filterDistance = $filterDistance;
+			$entry->setFieldValue(
+				'address',
+				array_merge(
+					$entry->getFieldValue('address'),
+					array('filterDistance' => $filterDistance)
+				)
+			);
 
 			$filterResults[] = $entry;
 		}
 
 		// sort with the closest first
 		usort($filterResults, function($a, $b) {
-			return $a->address->filterDistance - $b->address->filterDistance;
+			return $a->address['filterDistance'] - $b->address['filterDistance'];
 		});
 
 		return $filterResults;
