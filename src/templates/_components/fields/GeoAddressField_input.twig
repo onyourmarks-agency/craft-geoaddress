@@ -1,0 +1,49 @@
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("TDE\\GeoAddress\\assetbundles\\geoaddressfield\\GeoAddressFieldAsset") %}
+
+<div class="geoadress">
+	<div class="geoaddress--street">
+		{{ forms.textField({
+			id: name ~ '-street',
+			name: name ~ '[street]',
+			value: value.street,
+			placeholder: 'Address'|t('geoaddress')
+		}) }}
+	</div>
+	<div class="geoaddress--city-zip">
+		{{ forms.textField({
+			id: name ~ '-zip',
+			name: name ~ '[zip]',
+			class: "geoaddress-zip",
+			value: value.zip,
+			placeholder: 'Zipcode'|t('geoaddress'),
+		}) }}
+		{{ forms.textField({
+			id: name ~ '-city',
+			name: name ~ '[city]',
+			class: "geoaddress-city",
+			value: value.city,
+			placeholder: 'City'|t('geoaddress'),
+		}) }}
+	</div>
+	<div class="geoaddress--lat-lng">
+		{{ forms.textField({
+			id: name ~ '-lat',
+			name: name ~ '[lat]',
+			class: 'geoaddress-lat',
+			value: value.lat,
+			disabled: true,
+			placeholder: 'No coordinates found yet'|t('geoaddress')
+		}) }}
+
+		{{ forms.textField({
+			id: name ~ '-lng',
+			name: name ~ '[lng]',
+			class: 'geoaddress-lng',
+			value: value.lng,
+			disabled: true,
+			placeholder: 'No coordinates found yet'|t('geoaddress')
+		}) }}
+	</div>
+</div>

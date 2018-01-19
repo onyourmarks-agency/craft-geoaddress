@@ -1,0 +1,9 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+	label: 'Google API key',
+	instructions: 'Enter the Google Maps Geocoding API key',
+	id: 'googleApiKey',
+	name: 'googleApiKey',
+	value: settings['googleApiKey']})
+}}

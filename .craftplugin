@@ -1,0 +1,28 @@
+{
+    "pluginName": "TDE - Geo Address",
+    "pluginDescription": "Geo Address fields for Craft Sections",
+    "pluginVersion": "1.0.0",
+    "pluginAuthorName": "TDE",
+    "pluginVendorName": "tde",
+    "pluginAuthorUrl": "http://www.tde.nl",
+    "pluginAuthorGithub": "tdeNL",
+    "codeComments": "yes",
+    "pluginComponents": [
+        "fieldtypes",
+        "models",
+        "services"
+    ],
+    "consolecommandName": "",
+    "controllerName": "",
+    "cpsectionName": "",
+    "elementName": "",
+    "fieldName": "",
+    "modelName": "",
+    "purchasableName": "",
+    "recordName": "",
+    "serviceName": "",
+    "taskName": "",
+    "utilityName": "",
+    "widgetName": "",
+    "apiVersion": "api_version_3_0"
+}

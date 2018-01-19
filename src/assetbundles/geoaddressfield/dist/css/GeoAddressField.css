@@ -1,0 +1,27 @@
+.geoaddress--street {
+  margin-bottom: 15px;
+}
+
+.geoaddress--city-zip,
+.geoaddress--lat-lng {
+  margin-left: -15px;
+  margin-bottom: 15px;
+}
+
+.geoaddress--city-zip:after,
+.geoaddress--lat-lng:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.geoaddress--city-zip .field,
+.geoaddress--lat-lng .field {
+  margin-bottom: 0;
+  margin-top: 0 !important;
+  width: 50%;
+  float: left;
+  padding-left: 15px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
