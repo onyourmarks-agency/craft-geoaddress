@@ -75,6 +75,8 @@ class GeoAddressField extends Field
 		if (!is_array($value)) {
 			$value = json_decode($value, true);
 		}
+                
+		$value['zip'] = str_replace(' ', '', $value['zip'] ?? '');
 
 		return $value;
 	}
