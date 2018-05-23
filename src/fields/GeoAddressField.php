@@ -94,4 +94,12 @@ class GeoAddressField extends Field
 			GeoAddress::getInstance()->geoAddressService->getCoordsByAddress($value)
 		);
 	}
+
+    /**
+     * @return string
+     */
+    public function getContentColumnType(): string
+    {
+        return Schema::TYPE_TEXT;
+    }
 }
