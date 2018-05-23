@@ -25,11 +25,21 @@ class GeoAddressTwigExtension extends \Twig_Extension
 	public function getFilters()
 	{
 		return [
-			new \Twig_SimpleFilter('geoAddressFilter', [$this, 'geoAddressFilter']),
+			new \Twig_SimpleFilter('geoAddressFilter', [$this, 'geoAddressFilter'])
 		];
 	}
 
-	/**
+    /**
+     * @inheritdoc
+     */
+	public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('geoAddressCountries', [$this, 'geoAddressCountries'])
+        ];
+    }
+
+    /**
 	 * Apply the geo-address filter
 	 *
 	 * @param $entries
@@ -40,7 +50,7 @@ class GeoAddressTwigExtension extends \Twig_Extension
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function geoAddressFilter(array $entries = array(), $lat = null, $lng = null, $radius = null)
+	public function geoAddressFilter(array $entries = [], $lat = null, $lng = null, $radius = null)
 	{
 		$lat = $lat ?: (!empty($_GET['lat']) ? $_GET['lat'] : null);
 		$lng = $lng ?: (!empty($_GET['lng']) ? $_GET['lng'] : null);
@@ -52,4 +62,19 @@ class GeoAddressTwigExtension extends \Twig_Extension
 
 		return GeoAddress::getInstance()->geoAddressService->filterEntries($entries, $lat, $lng, $radius);
 	}
+
+    /**
+     * Return a list of available countries from the config
+     *
+     * @return array
+     */
+    public function geoAddressCountries()
+    {
+        $config = \Craft::$app->getConfig()->getConfigFromFile('geoaddress');
+        if (!empty($config['countries'])) {
+            return (array) $config['countries'];
+        }
+
+        return [];
+    }
 }

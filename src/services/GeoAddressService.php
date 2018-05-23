@@ -19,13 +19,13 @@ class GeoAddressService extends Component
 	 */
     public function getCoordsByAddress(array $value)
     {
-    	$address = array(
+    	$address = [
     		'lat' => null,
 			'lng' => null,
 			'formattedAddress' => null,
 			'countryName' => null,
 			'countryCode' => null,
-		);
+		];
 
 		$requestUrl = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' . urlencode(json_encode($value)) . '&key=' . GeoAddress::getInstance()->getSettings()->googleApiKey;
 		$result = json_decode(file_get_contents($requestUrl));
@@ -95,7 +95,7 @@ class GeoAddressService extends Component
 				'address',
 				array_merge(
 					$entry->getFieldValue('address'),
-					array('filterDistance' => $filterDistance)
+					['filterDistance' => $filterDistance]
 				)
 			);
 

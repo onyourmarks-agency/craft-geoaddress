@@ -7,7 +7,7 @@
 		{{ forms.textField({
 			id: name ~ '-street',
 			name: name ~ '[street]',
-			value: value.street,
+			value: (value.street is defined) ? value.street : '',
 			placeholder: 'Address'|t('geoaddress')
 		}) }}
 	</div>
@@ -16,15 +16,23 @@
 			id: name ~ '-zip',
 			name: name ~ '[zip]',
 			class: "geoaddress-zip",
-			value: value.zip,
+			value: (value.zip is defined) ? value.zip : '',
 			placeholder: 'Zipcode'|t('geoaddress'),
 		}) }}
 		{{ forms.textField({
 			id: name ~ '-city',
 			name: name ~ '[city]',
 			class: "geoaddress-city",
-			value: value.city,
+			value: (value.city is defined) ? value.city : '',
 			placeholder: 'City'|t('geoaddress'),
+		}) }}
+	</div>
+	<div class="geoaddress--country">
+		{{ forms.selectField({
+			id: name ~ '-country',
+			name: name ~ '[country]',
+			options: geoAddressCountries(),
+			value: (value.country is defined) ? value.country : ''
 		}) }}
 	</div>
 	<div class="geoaddress--lat-lng">
@@ -32,7 +40,7 @@
 			id: name ~ '-lat',
 			name: name ~ '[lat]',
 			class: 'geoaddress-lat',
-			value: value.lat,
+			value: (value.lat is defined) ? value.lat : '',
 			disabled: true,
 			placeholder: 'No coordinates found yet'|t('geoaddress')
 		}) }}
@@ -41,7 +49,7 @@
 			id: name ~ '-lng',
 			name: name ~ '[lng]',
 			class: 'geoaddress-lng',
-			value: value.lng,
+			value: (value.lng is defined) ? value.lng : '',
 			disabled: true,
 			placeholder: 'No coordinates found yet'|t('geoaddress')
 		}) }}

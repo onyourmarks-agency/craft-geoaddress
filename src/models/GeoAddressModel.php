@@ -32,6 +32,11 @@ class GeoAddressModel extends Model
 	 */
 	public $zip;
 
+    /**
+     * @var string
+     */
+	public $country;
+
 	/**
 	 * @var string
 	 */
@@ -70,6 +75,7 @@ class GeoAddressModel extends Model
 			['city', 'string'],
 			['state', 'string'],
 			['zip', 'string'],
+			['country', 'string'],
 			['countryName', 'string'],
 			['countryCode', 'string'],
 			['lat', 'float'],
