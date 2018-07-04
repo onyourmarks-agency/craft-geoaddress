@@ -43,7 +43,7 @@ class GeoAddressService extends Component
 			return $address;
 		}
 
-        $addressComponent = [];
+        $addressComponent = null;
         foreach ($result->results as $addressResult) {
             foreach ($addressResult->address_components as $component) {
                 if (!in_array('country', $component->types)) {
@@ -71,9 +71,14 @@ class GeoAddressService extends Component
         }
 
         // get the geometry
-        $address['lat'] = $addressComponent->geometry->location->lat;
-        $address['lng'] = $addressComponent->geometry->location->lng;
-        $address['formattedAddress'] = $addressComponent->formatted_address;
+        if (isset($addressComponent->geometry)) {
+            $address['lat'] = $addressComponent->geometry->location->lat;
+            $address['lng'] = $addressComponent->geometry->location->lng;
+        }
+
+        if (isset($addressComponent->formatted_address)) {
+            $address['formattedAddress'] = $addressComponent->formatted_address;
+        }
 
 		return $address;
     }
