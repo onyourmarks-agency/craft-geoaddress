@@ -43,22 +43,37 @@ class GeoAddressService extends Component
 			return $address;
 		}
 
-		// get the country name & code
-		if (isset($result->results[0]->address_components)) {
-			foreach ($result->results[0]->address_components as $component) {
-				if ($component->types[0] !== 'country') {
-					continue;
-				}
+        $addressComponent = [];
+        foreach ($result->results as $addressResult) {
+            foreach ($addressResult->address_components as $component) {
+                if (!in_array('country', $component->types)) {
+                    continue;
+                }
 
-				$address['countryName'] = $component->long_name;
-				$address['countryCode'] = $component->short_name;
-			}
-		}
+                if ($component->long_name !== $value['country']) {
+                    continue;
+                }
 
-		// get the geometry
-		$address['lat'] = $result->results[0]->geometry->location->lat;
-		$address['lng'] = $result->results[0]->geometry->location->lng;
-		$address['formattedAddress'] = $result->results[0]->formatted_address;
+                $addressComponent = $addressResult;
+            }
+        }
+
+        // get the country name & code
+        if (isset($addressComponent->address_components)) {
+            foreach ($addressComponent->address_components as $component) {
+                if ($component->types[0] !== 'country') {
+                    continue;
+                }
+
+                $address['countryName'] = $component->long_name;
+                $address['countryCode'] = $component->short_name;
+            }
+        }
+
+        // get the geometry
+        $address['lat'] = $addressComponent->geometry->location->lat;
+        $address['lng'] = $addressComponent->geometry->location->lng;
+        $address['formattedAddress'] = $addressComponent->formatted_address;
 
 		return $address;
     }
