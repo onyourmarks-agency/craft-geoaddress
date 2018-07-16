@@ -61,7 +61,7 @@ class GeoAddressService extends Component
         // get the country name & code
         if (isset($addressComponent->address_components)) {
             foreach ($addressComponent->address_components as $component) {
-                if ($component->types[0] !== 'country') {
+                if (count($component->types) === 0 || $component->types[0] !== 'country') {
                     continue;
                 }
 
