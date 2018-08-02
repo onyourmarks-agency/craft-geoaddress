@@ -32,7 +32,7 @@ class GeoAddressService extends Component
 
 		// no results
 		if ($result->status !== 'OK' || empty($result->results)) {
-			Craft::info(
+			Craft::warning(
 				Craft::t(
 					'geoaddress',
 					'GeoAddress coding failed: ' . $result->status

@@ -20,4 +20,6 @@ To install the plugin, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for TDE - Geo Address.
 
-3. In the Control Panel, go to Settings → Plugins and click the “Settings” link to insert your Google Maps Geocoding API key to increase the allowed API calls.
+4. In the Control Panel, go to Settings → Plugins and click the “Settings” link to insert your Google Maps Geocoding API key to increase the allowed API calls.
+
+5. Copy and rename the file geoaddress-sample.php to [your craft directory]/config/geoaddress.php and modify it to include only those countries you want enabled.
