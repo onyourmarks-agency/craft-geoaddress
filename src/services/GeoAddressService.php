@@ -55,6 +55,7 @@ class GeoAddressService extends Component
                 }
 
                 $addressComponent = $addressResult;
+                break 2;
             }
         }
 
