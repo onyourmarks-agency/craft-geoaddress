@@ -70,7 +70,6 @@ class GeoAddressModel extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
 			['street', 'string'],
 			['city', 'string'],
 			['state', 'string'],
