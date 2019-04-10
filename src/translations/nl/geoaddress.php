@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Name' => 'Naam',
 	'Address' => 'Adres',
 	'Zipcode' => 'Postcode',
 	'City' => 'Plaats',

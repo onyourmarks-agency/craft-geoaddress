@@ -3,6 +3,14 @@
 {% do view.registerAssetBundle("TDE\\GeoAddress\\assetbundles\\geoaddressfield\\GeoAddressFieldAsset") %}
 
 <div class="geoadress">
+	<div class="geoaddress--name">
+		{{ forms.textField({
+			id: name ~ '-name',
+			name: name ~ '[name]',
+			value: (value.name is defined) ? value.name : '',
+			placeholder: 'Name'|t('geoaddress')
+		}) }}
+	</div>
 	<div class="geoaddress--street">
 		{{ forms.textField({
 			id: name ~ '-street',

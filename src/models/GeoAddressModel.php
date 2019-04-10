@@ -12,6 +12,11 @@ use craft\base\Model;
  */
 class GeoAddressModel extends Model
 {
+    /**
+     * @var string
+     */
+    public $name;
+
 	/**
 	 * @var string
 	 */
@@ -70,6 +75,7 @@ class GeoAddressModel extends Model
     public function rules()
     {
         return [
+			['name', 'string'],
 			['street', 'string'],
 			['city', 'string'],
 			['state', 'string'],
