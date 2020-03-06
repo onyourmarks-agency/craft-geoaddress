@@ -50,6 +50,10 @@ class GeoAddressService extends Component
                     continue;
                 }
 
+                if (!isset($value['country'])) {
+                    continue;
+                }
+
                 if ($component->long_name !== $value['country']) {
                     continue;
                 }
@@ -81,7 +85,7 @@ class GeoAddressService extends Component
             $address['formattedAddress'] = $addressComponent->formatted_address;
         }
 
-		return $address;
+        return $address;
     }
 
 	/**
