@@ -5,7 +5,9 @@ namespace TDE\GeoAddress\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
+use craft\base\PreviewableFieldInterface;
 use craft\helpers\Db;
+use craft\helpers\Html;
 use TDE\GeoAddress\GeoAddress;
 use TDE\GeoAddress\models\GeoAddressModel;
 use yii\db\Schema;
@@ -16,7 +18,7 @@ use craft\helpers\Json;
  *
  * @package TDE\GeoAddress\fields
  */
-class GeoAddressField extends Field
+class GeoAddressField extends Field implements PreviewableFieldInterface
 {
     /**
      * Returns the display name of this class.
@@ -75,7 +77,7 @@ class GeoAddressField extends Field
 		if (!is_array($value)) {
 			$value = json_decode($value, true);
 		}
-                
+
 		$value['zip'] = str_replace(' ', '', $value['zip'] ?? '');
 
 		return $value;
@@ -101,5 +103,42 @@ class GeoAddressField extends Field
     public function getContentColumnType(): string
     {
         return Schema::TYPE_TEXT;
+    }
+
+    /**
+     * @param string $value
+     * @param ElementInterface $element
+     * @return string
+     */
+    public function getTableAttributeHtml($value, ElementInterface $element): string
+    {
+        $label = '';
+
+        if (!empty($value['street'])) {
+            $label .= $value['street'];
+        }
+
+        if (!empty($value['city'])) {
+            $label .= (!empty($label) ? ', ' : '') . $value['city'];
+        }
+
+        if (!empty($value['countryName'])) {
+            $label .= (!empty($label) ? ', ' : '') . $value['countryName'];
+        }
+
+        if (empty($label)) {
+            return '';
+        }
+
+        $html = Html::tag('span', $label);
+
+        if (!empty($value['lat']) && !empty($value['lng'])) {
+            $html = Html::tag('a', $html, [
+                'href' => sprintf('https://maps.google.com/?q=%s,%s', $value['lat'], $value['lng']),
+                'target' => '_blank',
+            ]);
+        }
+
+        return $html;
     }
 }
