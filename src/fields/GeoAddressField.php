@@ -21,8 +21,6 @@ use craft\helpers\Json;
 class GeoAddressField extends Field implements PreviewableFieldInterface
 {
     /**
-     * Returns the display name of this class.
-     *
      * @return string The display name of this class.
      */
     public static function displayName(): string
@@ -31,12 +29,7 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
     }
 
 	/**
-	 * @param $value
-	 * @param \craft\base\ElementInterface|NULL $element
-	 *
-	 * @return string
-	 * @throws \Twig_Error_Loader
-	 * @throws \yii\base\Exception
+	 * @inheritDoc
 	 */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
@@ -62,43 +55,52 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
     }
 
 	/**
-	 * @param $value
-	 * @param \craft\base\ElementInterface|NULL $element
-	 *
-	 * @return array|mixed
+	 * @inheritDoc
 	 */
 	public function normalizeValue($value, ElementInterface $element = NULL)
 	{
-		if (empty($value)) {
-			$model = new GeoAddressModel();
-			$value = $model->getAttributes();
-		}
+        if (is_string($value)) {
+            $value = Json::decodeIfJson($value);
+        }
 
-		if (!is_array($value)) {
-			$value = json_decode($value, true);
-		}
+        if ($value instanceof GeoAddressModel) {
+            $model = $value;
+        } elseif (is_array($value)) {
+            $model = new GeoAddressModel($value);
+        } else {
+            $model = new GeoAddressModel();
+        }
 
-		$value['zip'] = str_replace(' ', '', $value['zip'] ?? '');
-
-		return $value;
-	}
-
-	/**
-	 * @param array $value
-	 * @param \craft\base\ElementInterface|NULL $element
-	 *
-	 * @return array
-	 */
-	public function serializeValue($value, ElementInterface $element = NULL)
-	{
-		return array_merge(
-			$value,
-			GeoAddress::getInstance()->geoAddressService->getCoordsByAddress($value)
-		);
+		return $model;
 	}
 
     /**
-     * @return string
+     * @inheritDoc
+     */
+    public function serializeValue($value, ElementInterface $element = null)
+    {
+        /** @var GeoAddressModel $model */
+        $model = $value;
+
+        // normalize zip
+        $model->zip = trim(str_replace(' ', '', $model->zip));
+
+        $isChanged = !$element || ($element && $model->getAddress() !== $element->getFieldValue($this->handle)->getAddress());
+        if ($isChanged || (!($model->lat && $model->lng) && $model->getAddress())) {
+            $result = GeoAddress::getInstance()->geoAddressService->getCoordsByAddress($model->getAddress(), $model->country);
+
+            $model->setAttributes(array_filter($result));
+        }
+
+        if ($element) {
+            $element->setFieldValue($this->handle, $model);
+        }
+
+        return $model;
+    }
+
+    /**
+     * @inheritDoc
      */
     public function getContentColumnType(): string
     {
@@ -106,35 +108,36 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
     }
 
     /**
-     * @param string $value
-     * @param ElementInterface $element
-     * @return string
+     * @inheritDoc
      */
     public function getTableAttributeHtml($value, ElementInterface $element): string
     {
+        /** @var GeoAddressModel $model */
+        $model = $value;
+
         $label = '';
 
-        if (!empty($value['street'])) {
-            $label .= $value['street'];
+        if ($model->street) {
+            $label .= $model->street;
         }
 
-        if (!empty($value['city'])) {
-            $label .= (!empty($label) ? ', ' : '') . $value['city'];
+        if ($model->city) {
+            $label .= ($label ? ', ' : '') . $model->city;
         }
 
-        if (!empty($value['countryName'])) {
-            $label .= (!empty($label) ? ', ' : '') . $value['countryName'];
+        if ($model->countryName) {
+            $label .= ($label ? ', ' : '') . $model->countryName;
         }
 
-        if (empty($label)) {
+        if (!$label) {
             return '';
         }
 
         $html = Html::tag('span', $label);
 
-        if (!empty($value['lat']) && !empty($value['lng'])) {
+        if ($model->lat && $model->lng) {
             $html = Html::tag('a', $html, [
-                'href' => sprintf('https://maps.google.com/?q=%s,%s', $value['lat'], $value['lng']),
+                'href' => sprintf('https://maps.google.com/?q=%s,%s', $model->lat, $model->lng),
                 'target' => '_blank',
             ]);
         }

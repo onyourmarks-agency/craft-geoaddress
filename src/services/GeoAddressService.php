@@ -14,21 +14,25 @@ use TDE\GeoAddress\GeoAddress;
 class GeoAddressService extends Component
 {
 	/**
-	 * @param array $value
+	 * @param string $address
+	 * @param string $country
 	 * @return array
 	 */
-    public function getCoordsByAddress(array $value)
+    public function getCoordsByAddress(string $address, string $country)
     {
-    	$address = [
-    		'lat' => null,
-			'lng' => null,
-			'formattedAddress' => null,
-			'countryName' => null,
-			'countryCode' => null,
-		];
+		$requestUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
+        $requestUrl .= '?address=' . rawurlencode($address);
+        $requestUrl .= '&key=' . GeoAddress::getInstance()->getSettings()->googleApiKey;
 
-		$requestUrl = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' . urlencode(json_encode($value)) . '&key=' . GeoAddress::getInstance()->getSettings()->googleApiKey;
-		$result = json_decode(file_get_contents($requestUrl));
+        $result = json_decode(file_get_contents($requestUrl));
+
+        $address = [
+            'lat' => null,
+            'lng' => null,
+            'formattedAddress' => null,
+            'countryName' => null,
+            'countryCode' => null,
+        ];
 
 		// no results
 		if ($result->status !== 'OK' || empty($result->results)) {
@@ -50,11 +54,7 @@ class GeoAddressService extends Component
                     continue;
                 }
 
-                if (!isset($value['country'])) {
-                    continue;
-                }
-
-                if ($component->long_name !== $value['country']) {
+                if ($component->long_name !== $country) {
                     continue;
                 }
 

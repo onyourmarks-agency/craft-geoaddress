@@ -30,12 +30,13 @@ class GeoAddressModel extends Model
 	/**
 	 * @var string
 	 */
-	public $state;
-
-	/**
-	 * @var string
-	 */
 	public $zip;
+
+    /**
+     * @var string
+     * @deprecated Not in use anymore, but cant be removed as it corrupts existing models
+     */
+    public $state;
 
     /**
      * @var string
@@ -72,20 +73,46 @@ class GeoAddressModel extends Model
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
 			['name', 'string'],
 			['street', 'string'],
 			['city', 'string'],
-			['state', 'string'],
 			['zip', 'string'],
+			['state', 'string'],
 			['country', 'string'],
 			['countryName', 'string'],
 			['countryCode', 'string'],
-			['lat', 'float'],
-			['lng', 'float'],
+			['lat', 'number'],
+			['lng', 'number'],
 			['formattedAddress', 'string']
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        $address = '';
+
+        if ($this->street) {
+            $address .= ($address ? ' ' : '') . $this->street;
+        }
+
+        if ($this->city) {
+            $address .= ($address ? ' ' : '') . $this->city;
+        }
+
+        if ($this->zip) {
+            $address .= ($address ? ' ' : '') . $this->zip;
+        }
+
+        if ($this->country) {
+            $address .= ($address ? ' ' : '') . $this->country;
+        }
+
+        return $address;
     }
 }
