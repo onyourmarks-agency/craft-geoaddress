@@ -1,5 +1,9 @@
 # TDE - Geo Address Changelog
 
+## 1.0.14 - 2021-10-13
+### Fixed
+- Fixed an issue where existing GeoAddress-models would not be properly normalized/serialized into the element.
+
 ## 1.0.13 - 2021-09-29
 ### Added
 - Implemented `PreviewableFieldInterface` to add an address field to the element index
