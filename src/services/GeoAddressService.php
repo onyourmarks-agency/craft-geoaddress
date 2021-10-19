@@ -5,6 +5,7 @@ namespace TDE\GeoAddress\services;
 use Craft;
 use craft\base\Component;
 use TDE\GeoAddress\GeoAddress;
+use TDE\GeoAddress\models\GeoAddressModel;
 
 /**
  * Class GeoAddressService
@@ -116,13 +117,10 @@ class GeoAddressService extends Component
 			}
 
 			// add the distance, might be useful for the user
-			$entry->setFieldValue(
-				'address',
-				array_merge(
-					$entry->getFieldValue('address'),
-					['filterDistance' => $filterDistance]
-				)
-			);
+			/** @var GeoAddressModel $model */
+			$model = $entry->getFieldValue('address');
+			$model->filterDistance = $filterDistance;
+			$entry->setFieldValue('address', $model);
 
 			$filterResults[] = $entry;
 		}

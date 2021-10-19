@@ -69,6 +69,11 @@ class GeoAddressModel extends Model
 	public $formattedAddress;
 
     /**
+     * @var float|null
+     */
+    public $filterDistance;
+
+    /**
      * Returns the validation rules for attributes.
      *
      * @return array
