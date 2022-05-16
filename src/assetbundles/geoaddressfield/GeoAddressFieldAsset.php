@@ -10,7 +10,7 @@ class GeoAddressFieldAsset extends AssetBundle
 {
     public function init(): void
     {
-        $this->sourcePath = "@TDE/GeoAddress/assetbundles/geoaddressfield/dist";
+        $this->sourcePath = "@tde/craft/geoaddress/assetbundles/geoaddressfield/dist";
 
         $this->depends = [
             CpAsset::class,
