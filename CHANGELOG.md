@@ -1,5 +1,10 @@
 # TDE - Geo Address Changelog
 
+## 2.0.0 - 2022-05-16
+### Changed
+- Support for Craft 3
+- Bump PHP requirement to 8.0
+
 ## 1.0.15 - 2021-10-19
 ### Fixed
 - Fixed a bug where still an array was expected instead of the GeoAddress-model.

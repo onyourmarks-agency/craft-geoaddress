@@ -2,122 +2,61 @@
 
 namespace TDE\GeoAddress\models;
 
-use Craft;
 use craft\base\Model;
 
-/**
- * Class GeoAddressModel
- *
- * @package TDE\GeoAddress\models
- */
 class GeoAddressModel extends Model
 {
-    /**
-     * @var string
-     */
-    public $name;
+    public ?string $name = null;
 
-	/**
-	 * @var string
-	 */
-	public $street;
+    public ?string $street = null;
 
-	/**
-	 * @var string
-	 */
-	public $city;
+    public ?string $city = null;
 
-	/**
-	 * @var string
-	 */
-	public $zip;
+    public ?string $zip = null;
 
-    /**
-     * @var string
-     * @deprecated Not in use anymore, but cant be removed as it corrupts existing models
-     */
-    public $state;
+    /** @deprecated Not in use anymore, but cant be removed as it corrupts existing models */
+    public ?string $state = null;
 
-    /**
-     * @var string
-     */
-	public $country;
+    public ?string $country = null;
 
-	/**
-	 * @var string
-	 */
-	public $countryName;
+    public ?string $countryName = null;
 
-	/**
-	 * @var string
-	 */
-	public $countryCode;
+    public ?string $countryCode = null;
 
-	/**
-	 * @var float
-	 */
-	public $lat;
+    public ?float $lat = null;
 
-	/**
-	 * @var float
-	 */
-	public $lng;
+    public ?float $lng = null;
 
-	/**
-	 * @var string
-	 */
-	public $formattedAddress;
+    public ?string $formattedAddress = null;
 
-    /**
-     * @var float|null
-     */
-    public $filterDistance;
+    public ?float $filterDistance = null;
 
-    /**
-     * Returns the validation rules for attributes.
-     *
-     * @return array
-     */
+    public function getAddress(): string
+    {
+        $address = array_filter([
+            $this->street,
+            $this->city,
+            $this->zip,
+            $this->country
+        ]);
+
+        return implode(' ', $address);
+    }
+
     public function rules(): array
     {
         return [
-			['name', 'string'],
-			['street', 'string'],
-			['city', 'string'],
-			['zip', 'string'],
-			['state', 'string'],
-			['country', 'string'],
-			['countryName', 'string'],
-			['countryCode', 'string'],
-			['lat', 'number'],
-			['lng', 'number'],
-			['formattedAddress', 'string']
+            ['name', 'string'],
+            ['street', 'string'],
+            ['city', 'string'],
+            ['zip', 'string'],
+            ['state', 'string'],
+            ['country', 'string'],
+            ['countryName', 'string'],
+            ['countryCode', 'string'],
+            ['lat', 'number'],
+            ['lng', 'number'],
+            ['formattedAddress', 'string']
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddress(): string
-    {
-        $address = '';
-
-        if ($this->street) {
-            $address .= ($address ? ' ' : '') . $this->street;
-        }
-
-        if ($this->city) {
-            $address .= ($address ? ' ' : '') . $this->city;
-        }
-
-        if ($this->zip) {
-            $address .= ($address ? ' ' : '') . $this->zip;
-        }
-
-        if ($this->country) {
-            $address .= ($address ? ' ' : '') . $this->country;
-        }
-
-        return $address;
     }
 }

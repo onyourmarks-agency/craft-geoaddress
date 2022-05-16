@@ -2,28 +2,16 @@
 
 namespace TDE\GeoAddress\models;
 
-use Craft;
 use craft\base\Model;
 
-/**
- * Class GeoAddressSettingsModel
- *
- * @package TDE\GeoAddress\models
- */
 class GeoAddressSettingsModel extends Model
 {
-	/**
-	 * @var string
-	 */
-	public $googleApiKey;
+    public ?string $googleApiKey;
 
-	/**
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			['googleApiKey', 'string']
-		];
-	}
+    public function rules(): array
+    {
+        return [
+            ['googleApiKey', 'string']
+        ];
+    }
 }

@@ -3,10 +3,10 @@
 namespace TDE\GeoAddress;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
-use craft\web\twig\variables\CraftVariable;
 use TDE\GeoAddress\models\GeoAddressSettingsModel;
 use TDE\GeoAddress\services\GeoAddressService;
 use TDE\GeoAddress\twigextensions\GeoAddressTwigExtension;
@@ -14,60 +14,46 @@ use yii\base\Event;
 use TDE\GeoAddress\fields\GeoAddressField;
 
 /**
- * Class GeoAddress
- *
  * @property GeoAddressService $geoAddressService
- *
- * @package TDE\GeoAddress
  */
 class GeoAddress extends Plugin
 {
-    /**
-     * @var GeoAddress
-     */
-    public static $plugin;
+    public static GeoAddress $plugin;
 
-	/**
-	 * Initialize
-	 */
-    public function init() {
-		parent::init();
+    public function init(): void
+    {
+        parent::init();
 
-		self::$plugin = $this;
+        self::$plugin = $this;
 
-		// Register our fields
-		Event::on(
-			Fields::class,
-			Fields::EVENT_REGISTER_FIELD_TYPES,
-			function (RegisterComponentTypesEvent $event) {
-				$event->types[] = GeoAddressField::class;
-			}
-		);
+        $this->registerField();
 
-		// Register our Twig extesion
-		Craft::$app->view->registerTwigExtension(new GeoAddressTwigExtension());
-	}
+        Craft::$app->view->registerTwigExtension(new GeoAddressTwigExtension());
+    }
 
-	/**
-	 * @return GeoAddressSettingsModel
-	 */
-	public function createSettingsModel()
-	{
-		return new GeoAddressSettingsModel();
-	}
+    public function createSettingsModel(): ?Model
+    {
+        return new GeoAddressSettingsModel();
+    }
 
-	/**
-	 * @return string
-	 * @throws \Twig_Error_Loader
-	 * @throws \yii\base\Exception
-	 */
-	public function settingsHtml() : string
-	{
-		return Craft::$app->view->renderTemplate(
-			'geoaddress/settings',
-			[
-				'settings' => $this->getSettings()
-			]
-		);
-	}
+    public function settingsHtml(): string
+    {
+        return Craft::$app->view->renderTemplate(
+            'geoaddress/settings',
+            [
+                'settings' => $this->getSettings()
+            ]
+        );
+    }
+
+    protected function registerField(): void
+    {
+        Event::on(
+            Fields::class,
+            Fields::EVENT_REGISTER_FIELD_TYPES,
+            static function (RegisterComponentTypesEvent $event) {
+                $event->types[] = GeoAddressField::class;
+            }
+        );
+    }
 }

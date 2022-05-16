@@ -6,42 +6,28 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
-use craft\helpers\Db;
 use craft\helpers\Html;
 use TDE\GeoAddress\GeoAddress;
 use TDE\GeoAddress\models\GeoAddressModel;
 use yii\db\Schema;
 use craft\helpers\Json;
 
-/**
- * Class GeoAddressField
- *
- * @package TDE\GeoAddress\fields
- */
 class GeoAddressField extends Field implements PreviewableFieldInterface
 {
-    /**
-     * @return string The display name of this class.
-     */
     public static function displayName(): string
     {
         return 'Geo Address';
     }
 
-	/**
-	 * @inheritDoc
-	 */
     public function getInputHtml($value, ElementInterface $element = null): string
     {
     	if (!$value) {
 			$value = $this->normalizeValue($value);
 		}
 
-    	// Get our id and namespace
-        $id = Craft::$app->getView()->formatInputId($this->handle);
+        $id = Html::id($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
 
-        // Render the input template
         return Craft::$app->getView()->renderTemplate(
         	'geoaddress/_components/fields/GeoAddressField_input',
             [
@@ -54,11 +40,8 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
         );
     }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function normalizeValue($value, ElementInterface $element = NULL)
-	{
+    public function normalizeValue(mixed $value, ?ElementInterface $element = null): GeoAddressModel
+    {
         if (is_string($value)) {
             $value = Json::decodeIfJson($value);
         }
@@ -71,13 +54,10 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
             $model = new GeoAddressModel();
         }
 
-		return $model;
-	}
+        return $model;
+    }
 
-    /**
-     * @inheritDoc
-     */
-    public function serializeValue($value, ElementInterface $element = null)
+    public function serializeValue(mixed $value, ?ElementInterface $element = null): GeoAddressModel
     {
         /** @var GeoAddressModel $model */
         $model = $value;
@@ -92,25 +72,17 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
             $model->setAttributes(array_filter($result));
         }
 
-        if ($element) {
-            $element->setFieldValue($this->handle, $model);
-        }
+        $element?->setFieldValue($this->handle, $model);
 
         return $model;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getContentColumnType(): string
     {
         return Schema::TYPE_TEXT;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getTableAttributeHtml($value, ElementInterface $element): string
+    public function getTableAttributeHtml(mixed $value, ElementInterface $element): string
     {
         /** @var GeoAddressModel $model */
         $model = $value;

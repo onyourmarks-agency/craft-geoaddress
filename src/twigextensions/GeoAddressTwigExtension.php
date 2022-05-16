@@ -3,78 +3,62 @@
 namespace TDE\GeoAddress\twigextensions;
 
 use TDE\GeoAddress\GeoAddress;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
-/**
- * Class GeoAddressTwigExtension
- *
- * @package TDE\GeoAddress\twigextensions
- */
-class GeoAddressTwigExtension extends \Twig_Extension
+class GeoAddressTwigExtension extends AbstractExtension
 {
-	/**
-	 * @inheritdoc
-	 */
-	public function getName()
-	{
-		return 'GeoAddress';
-	}
+    public function getName(): string
+    {
+        return 'GeoAddress';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getFilters()
-	{
-		return [
-			new \Twig_SimpleFilter('geoAddressFilter', [$this, 'geoAddressFilter'])
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('geoAddressFilter', [$this, 'geoAddressFilter'])
 		];
 	}
 
-    /**
-     * @inheritdoc
-     */
-	public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('geoAddressCountries', [$this, 'geoAddressCountries'])
+            new TwigFunction('geoAddressCountries', [$this, 'geoAddressCountries'])
         ];
     }
 
-    /**
-	 * Apply the geo-address filter
-	 *
-	 * @param $entries
-	 * @param null $lat
-	 * @param null $lng
-	 * @param null $radius
-	 *
-	 * @return mixed
-	 * @throws \Exception
-	 */
-	public function geoAddressFilter(array $entries = [], $lat = null, $lng = null, $radius = null)
-	{
-		$lat = $lat ?: (!empty($_GET['lat']) ? $_GET['lat'] : null);
-		$lng = $lng ?: (!empty($_GET['lng']) ? $_GET['lng'] : null);
-		$radius = $radius ?: (!empty($_GET['radius']) ? $_GET['radius'] : 20);
-
-		if (!$lat || !$lng) {
-			return $entries;
-		}
-
-		return GeoAddress::getInstance()->geoAddressService->filterEntries($entries, $lat, $lng, $radius);
-	}
-
-    /**
-     * Return a list of available countries from the config
-     *
-     * @return array
-     */
-    public function geoAddressCountries()
+    public function geoAddressFilter(array $entries = [], mixed $lat = null, mixed $lng = null, mixed $radius = null): array
     {
-        $config = \Craft::$app->getConfig()->getConfigFromFile('geoaddress');
-        if (!empty($config['countries'])) {
-            return (array) $config['countries'];
+        $lat = (float) ($lat ?: $this->getFloatParameter('lat'));
+        $lng = (float) ($lng ?: $this->getFloatParameter('lng'));
+        $radius = (float) ($radius ?: $this->getFloatParameter('radius', 20.0));
+
+        if (!$lat || !$lng) {
+            return $entries;
         }
 
-        return [];
+        return GeoAddress::getInstance()->geoAddressService->filterEntries(
+            $entries,
+            $lat,
+            $lng,
+            $radius
+        );
+    }
+
+    public function geoAddressCountries(): array
+    {
+        $config = \Craft::$app->getConfig()->getConfigFromFile('geoaddress');
+        return $config['countries'] ?? [];
+    }
+
+    protected function getFloatParameter(string $name, ?float $default = null): float
+    {
+        $value = $_GET[$name] ?? $default;
+        if ($value) {
+            return (float) $value;
+        }
+
+        return $default;
     }
 }

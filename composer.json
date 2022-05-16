@@ -10,11 +10,12 @@
     "authors": [
         {
             "name": "TDE",
-            "homepage": "http://www.tde.nl"
+            "homepage": "https://www.tde.nl"
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0-RC1"
+		"php": "^8.0",
+        "craftcms/cms": "^4.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -32,5 +33,11 @@
             "geoAddressService": "TDE\\GeoAddress\\services\\GeoAddressService"
         },
         "class": "TDE\\GeoAddress\\GeoAddress"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
     }
 }
