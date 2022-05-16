@@ -65,7 +65,7 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
         $model = $value;
 
         // normalize zip
-        $model->zip = trim(str_replace(' ', '', $model->zip));
+        $model->zip = trim(str_replace(' ', '', $model->zip ?: ''));
 
         $isChanged = !$element || ($element && $model->getAddress() !== $element->getFieldValue($this->handle)->getAddress());
         if ($isChanged || (!($model->lat && $model->lng) && $model->getAddress())) {

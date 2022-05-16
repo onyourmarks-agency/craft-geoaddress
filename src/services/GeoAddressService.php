@@ -21,7 +21,7 @@ class GeoAddressService extends Component
             GeoAddress::getInstance()?->getSettings()->googleApiKey
         );
 
-        $result = json_decode(file_get_contents($requestUrl), false, 512, JSON_THROW_ON_ERROR);
+        $result = json_decode(file_get_contents($requestUrl), true, 512, JSON_THROW_ON_ERROR);
 
         $address = [
             'lat' => null,
@@ -72,8 +72,9 @@ class GeoAddressService extends Component
             }
         }
 
+
         // get the geometry
-        if (isset($addressComponent->geometry)) {
+        if (isset($addressComponent['geometry'])) {
             $address['lat'] = $addressComponent['geometry']['location']['lat'];
             $address['lng'] = $addressComponent['geometry']['location']['lng'];
         }

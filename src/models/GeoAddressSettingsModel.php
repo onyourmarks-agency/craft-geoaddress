@@ -8,7 +8,7 @@ use craft\base\Model;
 
 class GeoAddressSettingsModel extends Model
 {
-    public ?string $googleApiKey;
+    public ?string $googleApiKey = null;
 
     public function rules(): array
     {
