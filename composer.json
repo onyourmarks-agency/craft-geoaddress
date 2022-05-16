@@ -28,11 +28,11 @@
         "schemaVersion": "1.0.1",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/tdeNL/craftplugin-geoaddress/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/tdeNL/craft-geoaddress/master/CHANGELOG.md",
         "components": {
             "geoAddressService": "tde\\craft\\geoaddress\\services\\GeoAddressService"
         },
-        "class": "tde\\craft\\geoaddress"
+        "class": "tde\\craft\\geoaddress\\GeoAddress"
     },
     "config": {
         "allow-plugins": {
