@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace TDE\GeoAddress\fields;
+namespace tde\craft\geoaddress\fields;
 
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\Html;
-use TDE\GeoAddress\GeoAddress;
-use TDE\GeoAddress\models\GeoAddressModel;
+use tde\craft\geoaddress\GeoAddress;
+use tde\craft\geoaddress\models\GeoAddressModel;
 use yii\db\Schema;
 use craft\helpers\Json;
 

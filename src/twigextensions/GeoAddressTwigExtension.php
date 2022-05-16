@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace TDE\GeoAddress\twigextensions;
+namespace tde\craft\geoaddress\twigextensions;
 
-use TDE\GeoAddress\GeoAddress;
+use tde\craft\geoaddress\GeoAddress;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace TDE\GeoAddress;
+namespace tde\craft\geoaddress;
 
 use Craft;
 use craft\base\Model;
 use craft\base\Plugin;
 use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
-use TDE\GeoAddress\models\GeoAddressSettingsModel;
-use TDE\GeoAddress\services\GeoAddressService;
-use TDE\GeoAddress\twigextensions\GeoAddressTwigExtension;
+use tde\craft\geoaddress\models\GeoAddressSettingsModel;
+use tde\craft\geoaddress\services\GeoAddressService;
+use tde\craft\geoaddress\twigextensions\GeoAddressTwigExtension;
 use yii\base\Event;
 use TDE\GeoAddress\fields\GeoAddressField;
 

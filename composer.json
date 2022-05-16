@@ -3,8 +3,8 @@
     "description": "Geo Address fields for Craft Sections",
     "type": "craft-plugin",
     "support": {
-        "docs": "https://github.com/tdeNL/craftplugin-geoaddress/blob/master/README.md",
-        "issues": "https://github.com/tdeNL/craftplugin-geoaddress/issues"
+        "docs": "https://github.com/tdeNL/craft-geoaddress/blob/master/README.md",
+        "issues": "https://github.com/tdeNL/craft-geoaddress/issues"
     },
     "license": "MIT",
     "authors": [
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-          "TDE\\GeoAddress\\": "src/"
+          "tde\\craft\\geoaddress\\": "src/"
         }
     },
     "extra": {
@@ -30,9 +30,9 @@
         "hasCpSection": false,
         "changelogUrl": "https://raw.githubusercontent.com/tdeNL/craftplugin-geoaddress/master/CHANGELOG.md",
         "components": {
-            "geoAddressService": "TDE\\GeoAddress\\services\\GeoAddressService"
+            "geoAddressService": "tde\\craft\\geoaddress\\services\\GeoAddressService"
         },
-        "class": "TDE\\GeoAddress\\GeoAddress"
+        "class": "tde\\craft\\geoaddress"
     },
     "config": {
         "allow-plugins": {

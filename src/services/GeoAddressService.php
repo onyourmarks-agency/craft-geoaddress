@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TDE\GeoAddress\services;
+namespace tde\craft\geoaddress\services;
 
 use Craft;
 use craft\base\Component;
-use TDE\GeoAddress\GeoAddress;
-use TDE\GeoAddress\models\GeoAddressModel;
+use tde\craft\geoaddress\GeoAddress;
+use tde\craft\geoaddress\models\GeoAddressModel;
 
 class GeoAddressService extends Component
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TDE\GeoAddress\models;
+namespace tde\craft\geoaddress\models;
 
 use craft\base\Model;
 

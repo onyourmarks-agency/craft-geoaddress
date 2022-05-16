@@ -1,6 +1,6 @@
 <?php
 
-namespace TDE\GeoAddress\assetbundles\geoaddressfield;
+namespace tde\craft\geoaddress\assetbundles\geoaddressfield;
 
 use Craft;
 use craft\web\AssetBundle;
