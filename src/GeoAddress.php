@@ -9,11 +9,11 @@ use craft\base\Model;
 use craft\base\Plugin;
 use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
+use tde\craft\geoaddress\fields\GeoAddressField;
 use tde\craft\geoaddress\models\GeoAddressSettingsModel;
 use tde\craft\geoaddress\services\GeoAddressService;
 use tde\craft\geoaddress\twigextensions\GeoAddressTwigExtension;
 use yii\base\Event;
-use TDE\GeoAddress\fields\GeoAddressField;
 
 /**
  * @property GeoAddressService $geoAddressService
