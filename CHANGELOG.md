@@ -1,6 +1,6 @@
 # TDE - Geo Address Changelog
 
-## 2.0.0.beta-2 - 2022-05-16
+## 2.0.0.beta-2 - 2022-05-31
 ### Changed
 - Fix readme
 - Fix classname
