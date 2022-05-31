@@ -1,8 +1,15 @@
 # TDE - Geo Address Changelog
 
-## 2.0.0 - 2022-05-16
+## 2.0.0.beta-2 - 2022-05-16
 ### Changed
-- Support for Craft 3
+- Fix readme
+- Fix classname
+- Support for Craft 4
+- Bump PHP requirement to 8.0
+
+## 2.0.0.beta-1 - 2022-05-16
+### Changed
+- Support for Craft 4
 - Bump PHP requirement to 8.0
 
 ## 1.0.15 - 2021-10-19
