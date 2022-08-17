@@ -1,10 +1,10 @@
-# TDE - Geo Address plugin for Craft CMS 3.x
+# TDE - Geo Address plugin for Craft CMS 4.x
 
-Geo Address field for Craft 3 Sections.
+Geo Address field for Craft 4 Sections.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
