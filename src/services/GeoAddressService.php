@@ -21,11 +21,9 @@ class GeoAddressService extends Component
 	 */
     public function getCoordsByAddress(string $address, string $country)
     {
-		$requestUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
+        $requestUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
         $requestUrl .= '?address=' . rawurlencode($address);
         $requestUrl .= '&key=' . GeoAddress::getInstance()->getSettings()->googleApiKey;
-
-        $result = json_decode(file_get_contents($requestUrl));
 
         $address = [
             'lat' => null,
@@ -34,6 +32,16 @@ class GeoAddressService extends Component
             'countryName' => null,
             'countryCode' => null,
         ];
+
+        if (!GeoAddress::getInstance()?->getSettings()->googleApiKey) {
+            return $address;
+        }
+
+        $ch =  curl_init($requestUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $result = json_decode(curl_exec($ch), true, 512, JSON_THROW_ON_ERROR);
 
 		// no results
 		if ($result->status !== 'OK' || empty($result->results)) {

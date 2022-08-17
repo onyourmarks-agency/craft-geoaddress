@@ -1,5 +1,10 @@
 # TDE - Geo Address Changelog
 
+## 1.0.16 - 2022-08-17
+### Fixed
+- Use curl instead of file_get_contents
+
+
 ## 1.0.15 - 2021-10-19
 ### Fixed
 - Fixed a bug where still an array was expected instead of the GeoAddress-model.
