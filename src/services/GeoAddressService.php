@@ -41,7 +41,7 @@ class GeoAddressService extends Component
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-        $result = json_decode(curl_exec($ch), true, 512, JSON_THROW_ON_ERROR);
+        $result = json_decode(curl_exec($ch), false, 512, JSON_THROW_ON_ERROR);
 
 		// no results
 		if ($result->status !== 'OK' || empty($result->results)) {
