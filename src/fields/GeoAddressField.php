@@ -10,6 +10,7 @@ use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\Html;
 use tde\craft\geoaddress\GeoAddress;
+use tde\craft\geoaddress\gql\types\AddressType;
 use tde\craft\geoaddress\models\GeoAddressModel;
 use yii\db\Schema;
 use craft\helpers\Json;
@@ -82,6 +83,14 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
     public function getContentColumnType(): string
     {
         return Schema::TYPE_TEXT;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentGqlType(): array|\GraphQL\Type\Definition\Type
+    {
+        return AddressType::getType();
     }
 
     public function getTableAttributeHtml(mixed $value, ElementInterface $element): string
