@@ -7,9 +7,12 @@ namespace tde\craft\geoaddress;
 use Craft;
 use craft\base\Model;
 use craft\base\Plugin;
+use craft\events\RegisterGqlTypesEvent;
 use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
+use craft\services\Gql;
 use tde\craft\geoaddress\fields\GeoAddressField;
+use tde\craft\geoaddress\gql\types\AddressType;
 use tde\craft\geoaddress\models\GeoAddressSettingsModel;
 use tde\craft\geoaddress\services\GeoAddressService;
 use tde\craft\geoaddress\twigextensions\GeoAddressTwigExtension;
@@ -55,6 +58,14 @@ class GeoAddress extends Plugin
             Fields::EVENT_REGISTER_FIELD_TYPES,
             static function (RegisterComponentTypesEvent $event) {
                 $event->types[] = GeoAddressField::class;
+            }
+        );
+
+        Event::on(
+            Gql::class,
+            Gql::EVENT_REGISTER_GQL_TYPES,
+            function(RegisterGqlTypesEvent $event) {
+                $event->types[] = AddressType::class;
             }
         );
     }
