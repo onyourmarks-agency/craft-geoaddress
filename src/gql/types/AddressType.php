@@ -3,11 +3,11 @@
 namespace tde\craft\geoaddress\gql\types;
 
 use craft\gql\GqlEntityRegistry;
-use craft\helpers\ArrayHelper;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
-class AddressType {
+class AddressType
+{
     public static function getName(): string
     {
         return 'address_Address';
@@ -15,15 +15,16 @@ class AddressType {
 
     public static function getType(): Type
     {
-        if ($type = GqlEntityRegistry::getEntity(self::class)) {
-            return $type;
-        }
-
-        return GqlEntityRegistry::createEntity(self::class, new ObjectType([
-            'name' => static::getName(),
-            'fields' => self::class . '::getFieldDefinitions',
-            'description' => 'This is the interface implemented by all address fields.',
-        ]));
+        return GqlEntityRegistry::getOrCreate(
+            self::class,
+            static fn() => new ObjectType(
+                [
+                    'name' => static::getName(),
+                    'fields' => self::class . '::getFieldDefinitions',
+                    'description' => 'This is the interface implemented by all address fields.',
+                ]
+            )
+        );
     }
 
     public static function getFieldDefinitions(): array

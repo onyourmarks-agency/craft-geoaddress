@@ -9,6 +9,7 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\Html;
+use GraphQL\Type\Definition\Type;
 use tde\craft\geoaddress\GeoAddress;
 use tde\craft\geoaddress\gql\types\AddressType;
 use tde\craft\geoaddress\models\GeoAddressModel;
@@ -85,10 +86,7 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
         return Schema::TYPE_TEXT;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getContentGqlType(): array|\GraphQL\Type\Definition\Type
+    public function getContentGqlType(): array|Type
     {
         return AddressType::getType();
     }
