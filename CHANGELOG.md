@@ -1,5 +1,9 @@
 # TDE - Geo Address Changelog
 
+## 2.0.1 - 2023-10-18
+### Added
+- Support for GraphQL
+
 ## 2.0.0 - 2022-08-17
 ### Changed
 - Use CURL instead
