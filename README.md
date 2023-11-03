@@ -22,4 +22,4 @@ To install the plugin, follow these instructions.
 
 4. In the Control Panel, go to Settings → Plugins and click the “Settings” link to insert your Google Maps Geocoding API key to increase the allowed API calls.
 
-5. Copy and rename the file geoaddress-sample.php to [your craft directory]/config/geoaddress.php and modify it to include only those countries you want enabled.
+5. Copy and rename the file geoaddress-sample.php to [your craft directory]/config/geoaddress.php and include the countries you want enabled.
