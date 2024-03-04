@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace tde\craft\geoaddress;
+namespace oym\craft\geoaddress;
 
 use Craft;
 use craft\base\Model;
@@ -11,11 +11,11 @@ use craft\events\RegisterGqlTypesEvent;
 use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
 use craft\services\Gql;
-use tde\craft\geoaddress\fields\GeoAddressField;
-use tde\craft\geoaddress\gql\types\AddressType;
-use tde\craft\geoaddress\models\GeoAddressSettingsModel;
-use tde\craft\geoaddress\services\GeoAddressService;
-use tde\craft\geoaddress\twigextensions\GeoAddressTwigExtension;
+use oym\craft\geoaddress\fields\GeoAddressField;
+use oym\craft\geoaddress\gql\types\AddressType;
+use oym\craft\geoaddress\models\GeoAddressSettingsModel;
+use oym\craft\geoaddress\services\GeoAddressService;
+use oym\craft\geoaddress\twigextensions\GeoAddressTwigExtension;
 use yii\base\Event;
 
 /**
@@ -64,7 +64,7 @@ class GeoAddress extends Plugin
         Event::on(
             Gql::class,
             Gql::EVENT_REGISTER_GQL_TYPES,
-            function(RegisterGqlTypesEvent $event) {
+            function (RegisterGqlTypesEvent $event) {
                 $event->types[] = AddressType::class;
             }
         );

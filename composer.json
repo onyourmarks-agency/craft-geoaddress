@@ -1,39 +1,40 @@
 {
-    "name": "tde/craftplugin-geoaddress",
+    "name": "oym/craftplugin-geoaddress",
     "description": "Geo Address fields for Craft Sections",
     "type": "craft-plugin",
     "support": {
-        "docs": "https://github.com/tdeNL/craft-geoaddress/blob/master/README.md",
-        "issues": "https://github.com/tdeNL/craft-geoaddress/issues"
+        "docs": "https://github.com/onyourmarks-agency/craft-geoaddress/blob/master/README.md",
+        "issues": "https://github.com/onyourmarks-agency/craft-geoaddress/issues"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "TDE",
-            "homepage": "https://www.tde.nl"
+            "name": "On Your Marks",
+            "homepage": "https://www.onyourmarks.agency"
         }
     ],
     "require": {
 		"php": "^8.0",
         "craftcms/cms": "^4.0.0",
-		"ext-curl": "*"
+        "ext-curl": "*"
 	},
     "autoload": {
         "psr-4": {
-          "tde\\craft\\geoaddress\\": "src/"
-        }
+          "oym\\craft\\geoaddress\\": "src/"
+        },
+        "files": ["src/deprecated.php"]
     },
     "extra": {
-        "name": "TDE - Geo Address Fields",
+        "name": "OYM - Geo Address Fields",
         "handle": "geoaddress",
         "schemaVersion": "1.0.1",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/tdeNL/craft-geoaddress/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/onyourmarks-agency/craft-geoaddress/master/CHANGELOG.md",
         "components": {
-            "geoAddressService": "tde\\craft\\geoaddress\\services\\GeoAddressService"
+            "geoAddressService": "oym\\craft\\geoaddress\\services\\GeoAddressService"
         },
-        "class": "tde\\craft\\geoaddress\\GeoAddress"
+        "class": "oym\\craft\\geoaddress\\GeoAddress"
     },
     "config": {
         "allow-plugins": {

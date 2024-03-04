@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace tde\craft\geoaddress\fields;
+namespace oym\craft\geoaddress\fields;
 
 use Craft;
 use craft\base\ElementInterface;
@@ -10,9 +10,9 @@ use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\Html;
 use GraphQL\Type\Definition\Type;
-use tde\craft\geoaddress\GeoAddress;
-use tde\craft\geoaddress\gql\types\AddressType;
-use tde\craft\geoaddress\models\GeoAddressModel;
+use oym\craft\geoaddress\GeoAddress;
+use oym\craft\geoaddress\gql\types\AddressType;
+use oym\craft\geoaddress\models\GeoAddressModel;
 use yii\db\Schema;
 use craft\helpers\Json;
 
@@ -25,15 +25,15 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
 
     public function getInputHtml($value, ElementInterface $element = null): string
     {
-    	if (!$value) {
-			$value = $this->normalizeValue($value);
-		}
+        if (!$value) {
+            $value = $this->normalizeValue($value);
+        }
 
         $id = Html::id($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
 
         return Craft::$app->getView()->renderTemplate(
-        	'geoaddress/_components/fields/GeoAddressField_input',
+            'geoaddress/_components/fields/GeoAddressField_input',
             [
                 'name' => $this->handle,
                 'value' => $value,

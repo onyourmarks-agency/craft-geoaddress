@@ -1,11 +1,11 @@
 <?php
 
-namespace tde\craft\geoaddress\migrations;
+namespace oym\craft\geoaddress\migrations;
 
 use Craft;
 use craft\db\Migration;
 use craft\db\Table;
-use tde\craft\geoaddress\fields\GeoAddressField;
+use oym\craft\geoaddress\fields\GeoAddressField;
 
 /**
  * m220516_144416_update_field_handle migration.
@@ -23,7 +23,7 @@ class m220516_144416_update_field_handle extends Migration
                 'type' => GeoAddressField::class,
             ],
             [
-                'type' => 'TDE\GeoAddress\fields\GeoAddressField',
+                'type' => 'OYM\GeoAddress\fields\GeoAddressField',
             ]
         );
 
@@ -38,7 +38,7 @@ class m220516_144416_update_field_handle extends Migration
         $this->update(
             Table::FIELDS,
             [
-                'type' => 'TDE\GeoAddress\fields\GeoAddressField',
+                'type' => 'OYM\GeoAddress\fields\GeoAddressField',
             ],
             [
                 'type' => GeoAddressField::class,

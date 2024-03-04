@@ -1,6 +1,6 @@
 <?php
 
-namespace tde\craft\geoaddress\assetbundles\geoaddressfield;
+namespace oym\craft\geoaddress\assetbundles\geoaddressfield;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -10,7 +10,7 @@ class GeoAddressFieldAsset extends AssetBundle
 {
     public function init(): void
     {
-        $this->sourcePath = "@tde/craft/geoaddress/assetbundles/geoaddressfield/dist";
+        $this->sourcePath = "@oym/craft/geoaddress/assetbundles/geoaddressfield/dist";
 
         $this->depends = [
             CpAsset::class,

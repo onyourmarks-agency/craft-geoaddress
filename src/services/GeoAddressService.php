@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace tde\craft\geoaddress\services;
+namespace oym\craft\geoaddress\services;
 
 use Craft;
 use craft\base\Component;
-use tde\craft\geoaddress\GeoAddress;
-use tde\craft\geoaddress\models\GeoAddressModel;
+use oym\craft\geoaddress\GeoAddress;
+use oym\craft\geoaddress\models\GeoAddressModel;
 
 class GeoAddressService extends Component
 {
@@ -22,7 +22,7 @@ class GeoAddressService extends Component
             'countryName' => null,
             'countryCode' => null,
         ];
-        
+
         if (!GeoAddress::getInstance()?->getSettings()->googleApiKey) {
             return $address;
         }

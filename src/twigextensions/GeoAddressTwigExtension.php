@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace tde\craft\geoaddress\twigextensions;
+namespace oym\craft\geoaddress\twigextensions;
 
-use tde\craft\geoaddress\GeoAddress;
+use oym\craft\geoaddress\GeoAddress;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -20,8 +20,8 @@ class GeoAddressTwigExtension extends AbstractExtension
     {
         return [
             new TwigFilter('geoAddressFilter', [$this, 'geoAddressFilter'])
-		];
-	}
+        ];
+    }
 
     public function getFunctions(): array
     {

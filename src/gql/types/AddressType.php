@@ -1,6 +1,6 @@
 <?php
 
-namespace tde\craft\geoaddress\gql\types;
+namespace oym\craft\geoaddress\gql\types;
 
 use craft\gql\GqlEntityRegistry;
 use GraphQL\Type\Definition\ObjectType;
