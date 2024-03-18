@@ -1,5 +1,15 @@
 # OYM - Geo Address Changelog
 
+## 3.0.0 - 2024-03-18
+### Updated
+- Updated Craft namespace to \Craft
+- Updated PHP version  to 8.2 or higher
+- Updated craftcms/cms version to 5.0.0-beta.1 or higher
+- Updated phpcs.xml
+
+### Removed
+- Removed deprecated.php
+
 ## 2.1.0 - 2024-03-04
 ### Updated
 - Updated TDE > OYM

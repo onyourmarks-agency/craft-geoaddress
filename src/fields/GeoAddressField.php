@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace oym\craft\geoaddress\fields;
 
-use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
@@ -30,9 +29,9 @@ class GeoAddressField extends Field implements PreviewableFieldInterface
         }
 
         $id = Html::id($this->handle);
-        $namespacedId = Craft::$app->getView()->namespaceInputId($id);
+        $namespacedId = \Craft::$app->getView()->namespaceInputId($id);
 
-        return Craft::$app->getView()->renderTemplate(
+        return \Craft::$app->getView()->renderTemplate(
             'geoaddress/_components/fields/GeoAddressField_input',
             [
                 'name' => $this->handle,

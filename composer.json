@@ -14,15 +14,14 @@
         }
     ],
     "require": {
-		"php": "^8.0",
-        "craftcms/cms": "^4.0.0",
-        "ext-curl": "*"
+        "php": "^8.2",
+        "ext-curl": "*",
+        "craftcms/cms": "^5.0.0-beta.1"
 	},
     "autoload": {
         "psr-4": {
           "oym\\craft\\geoaddress\\": "src/"
-        },
-        "files": ["src/deprecated.php"]
+        }
     },
     "extra": {
         "name": "OYM - Geo Address Fields",

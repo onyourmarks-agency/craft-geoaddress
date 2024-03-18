@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace oym\craft\geoaddress\services;
 
-use Craft;
 use craft\base\Component;
 use oym\craft\geoaddress\GeoAddress;
 use oym\craft\geoaddress\models\GeoAddressModel;
@@ -41,8 +40,8 @@ class GeoAddressService extends Component
 
         // no results
         if (!$result || $result['status'] !== 'OK' || empty($result['results'])) {
-            Craft::warning(
-                Craft::t(
+            \Craft::warning(
+                \Craft::t(
                     'geoaddress',
                     'GeoAddress coding failed: ' . $result['status']
                 ),

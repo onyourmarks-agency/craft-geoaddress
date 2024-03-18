@@ -1,10 +1,10 @@
-# OYM - Geo Address plugin for Craft CMS 4.x
+# OYM - Geo Address plugin for Craft CMS 5.x
 
-Geo Address field for Craft 4 Sections.
+Geo Address field for Craft CMS.
 
 ## Requirements
 
-This plugin requires Craft CMS 4.0.0 or later.
+This plugin requires Craft CMS 5.0.0 or later.
 
 ## Installation
 

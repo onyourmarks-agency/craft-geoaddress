@@ -2,7 +2,6 @@
 
 namespace oym\craft\geoaddress\migrations;
 
-use Craft;
 use craft\db\Migration;
 use craft\db\Table;
 use oym\craft\geoaddress\fields\GeoAddressField;
